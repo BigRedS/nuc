@@ -10,4 +10,6 @@ spec:
     path: 'apps/'
     repoURL: https://github.com/BigRedS/nuc
     targetRevision: HEAD
+  syncPolicy:
+    automated: {}
   project: 'default'
