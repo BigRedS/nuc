@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.longhorn.io'
+    targetRevision: 1.5.1
+    chart: longhorn
+    helm:
+      releaseName: longhorn
+      parameters:
+      - name: defaultDataPath
+      - value: /media/k3s/longhorn/
+      values: |
+        fullnameOverride: longhorn
+        defaultSettings:
+          taintToleration: "home=true:NoSchedule"
+          priorityClass: system-node-critical
+        longhornManager:
+          tolerations:
+              - effect: NoSchedule
+                key: home
+                operator: Exists
+        longhornDriver:
+          tolerations:
+              - effect: NoSchedule
+                key: home
+                operator: Exists
+        longhornUI:
+          tolerations:
+              - effect: NoSchedule
+                key: home
+                operator: Exists
+        persistence:
+          reclaimPolicy: Retain
+        ingress:
+          enabled: false
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: longhorn-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
