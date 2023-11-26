@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frigate
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://blakeblackshear.github.io/blakeshome-charts/'
+    targetRevision: 7.1.0
+    chart: frigate
+    helm:
+      releaseName: frigate
+      values: |
+        mqtt:
+          enabled: false
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: frigate
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - Validate=false
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
