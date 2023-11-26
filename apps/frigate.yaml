@@ -12,16 +12,27 @@ spec:
     helm:
       releaseName: frigate
       values: |
-        config:
+        config: |
           mqtt:
             enabled: false
+          cameras:
+            front:
+              ffmpeg:
+                inputs:
+                  - path: rtsp://streamer:{FRIGATE_RTSP_PASSWORD}@192.168.0.7:554/Streaming/channels/101
+                    roles:
+                      - detect
+                      - rtmp
+              detect:
+                width: 1280
+                height: 720
         service:
           port: 80
           type: LoadBalancer
         persistence:
           data:
             size: 10Gi
-            enabled: true
+            enabled: false
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: frigate
