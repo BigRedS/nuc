@@ -12,8 +12,16 @@ spec:
     helm:
       releaseName: frigate
       values: |
-        mqtt:
-          enabled: false
+        config:
+          mqtt:
+            enabled: false
+        service:
+          port: 80
+          type: LoadBalancer
+        persistence:
+          data:
+            size: 10Gi
+            enabled: true
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: frigate
