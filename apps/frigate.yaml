@@ -36,7 +36,8 @@ spec:
                 height: 720
                 enabled: True
               motion:
-                mask:    - 1280,470,724,437,344,379,0,343,0,0,1280,0
+                mask:
+                - 1280,470,724,437,344,379,0,343,0,0,1280,0
           detectors:
             coral:
               type: edgetpu
