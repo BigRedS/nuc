@@ -26,6 +26,7 @@ spec:
           cameras:
             front:
               ffmpeg:
+                hwaccel_args: preset-vaapi
                 inputs:
                   - path: rtsp://streamer:Stinkles@192.168.0.7/Streaming/channels/101
                     roles:
