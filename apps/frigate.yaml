@@ -12,9 +12,9 @@ spec:
     helm:
       releaseName: frigate
       values: |
+        coral:
+          enabled: true
         config: |
-          coral:
-            enabled: true
           mqtt:
             enabled: false
           cameras:
