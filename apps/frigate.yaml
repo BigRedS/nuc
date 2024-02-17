@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://blakeblackshear.github.io/blakeshome-charts/'
-    targetRevision: 7.1.0
+    targetRevision: '*'
     chart: frigate
     helm:
       releaseName: frigate
