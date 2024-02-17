@@ -34,6 +34,11 @@ spec:
               detect:
                 width: 1280
                 height: 720
+                enabled: True
+          detectors:
+            coral:
+              type: edgetpu
+              device: usb
         service:
           port: 80
           type: LoadBalancer
