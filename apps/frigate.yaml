@@ -16,7 +16,11 @@ spec:
           enabled: true
         config: |
           mqtt:
-            enabled: false
+            enabled: true
+            host: homeassistant.fritz.box
+            port: 1883
+            user: user
+            password: passwd
           cameras:
             front:
               ffmpeg:
