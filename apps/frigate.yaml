@@ -12,6 +12,8 @@ spec:
     helm:
       releaseName: frigate
       values: |
+        image:
+          tag: 0.13.1
         coral:
           enabled: true
         config: |
