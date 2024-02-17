@@ -13,6 +13,8 @@ spec:
       releaseName: frigate
       values: |
         config: |
+          coral:
+            enabled: true
           mqtt:
             enabled: false
           cameras:
