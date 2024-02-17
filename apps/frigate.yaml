@@ -21,7 +21,7 @@ spec:
             front:
               ffmpeg:
                 inputs:
-                  - path: rtsp://streamer:{FRIGATE_RTSP_PASSWORD}@192.168.0.7:554/Streaming/channels/101
+                  - path: rtsp://streamer:Stinkles@192.168.0.7/Streaming/channels/101
                     roles:
                       - detect
                       - rtmp
