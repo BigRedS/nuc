@@ -9,10 +9,25 @@ spec:
     repoURL: https://mojo2600.github.io/pihole-kubernetes/
     targetRevision: "*"
     chart: pihole
+    releaseName: pihole
     helm:
-      config:
-        service:
+      values: |
+        serviceWeb:
+          loadBalancerIP: 192.168.0.205
+          annotations:
+            metallb.universe.tf/allow-shared-ip: pihole-svc
           type: LoadBalancer
+        serviceDns:
+          loadBalancerIP: 192.168.0.205
+          annotations:
+            metallb.universe.tf/allow-shared-ip: pihole-svc
+          type: LoadBalancer
+        podDnsConfig:
+          enabled: true
+          policy: "None"
+          nameservers:
+          - 8.8.8.8
+          - 1.1.1.1
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: pihole
