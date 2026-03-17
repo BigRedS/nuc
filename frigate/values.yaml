@@ -1,0 +1,81 @@
+coral:
+    enabled: true
+    hostPath: /dev/bus/usb
+
+config: |
+    logger:
+        logs:
+          frigate.record.maintainer: debug
+
+    mqtt:
+        enabled: false
+    detectors:
+        coral:
+            type: edgetpu
+            device: usb
+    cameras:
+        front:
+            ffmpeg:
+                inputs:
+                    - path: rtsp://streamer:Stinkles@192.168.0.7/Streaming/channels/101
+                      roles:
+                        - detect
+                        - record
+            detect:
+                width: 1280
+                height: 720
+                fps: 3
+                enabled: True
+            motion:
+                mask:
+                - 1280,470,724,437,344,379,0,343,0,0,1280,0
+            record:
+                enabled: True
+                retain:
+                    days: 0
+                events:
+                  retain:
+                    default: 14
+                    mode: active_objects
+            snapshots:
+                enabled: True
+
+        road:
+            ffmpeg:
+                inputs:
+                    - path: rtsp://streamer:Stinkles@192.168.0.10/Streaming/channels/101
+                      roles:
+                        - detect
+                        - record
+            detect:
+                width: 1280
+                height: 720
+                fps: 3
+                enabled: True
+            motion:
+                mask:
+                - 1280,470,724,437,344,379,0,343,0,0,1280,0
+            record:
+                enabled: True
+                retain:
+                    days: 0
+                events:
+                  retain:
+                    default: 14
+                    mode: active_objects
+            snapshots:
+                enabled: True
+service:
+  type: LoadBalancer
+  port: 80
+  loadBalancerIP: 192.168.0.204
+
+ingress:
+    enabled: false
+
+persistence:
+    config:
+        enabled: false
+    media:
+        enabled: true
+        size: 80Gi

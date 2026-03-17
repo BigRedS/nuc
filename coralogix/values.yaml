@@ -1,0 +1,12 @@
+global:
+  domain: eu2.coralogix.com
+  clusterName: nuc
+  defaultApplicationName: nucs
+  defaultSubsystemName: nucs
+  collectionInterval: 60s
+opentelemetry-agent:
+  enabled: true
+  mode: daemonset
+opentelemetry-cluster-collector:
+  enabled: true
+  mode: deployment
