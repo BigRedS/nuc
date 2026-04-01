@@ -1,8 +1,8 @@
 #! /bin/bash
-master_node="nuc-1"
+master_node="nuc-2"
 
 echo ">Installing dependencies"
-apt-get install curl vim 
+sudo apt-get install curl vim
 
 echo "> Getting token"
 K3S_TOKEN=$(ssh avi@$master_node sudo -S cat /var/lib/rancher/k3s/server/node-token)
